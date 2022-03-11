@@ -1,46 +1,6 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: threatstack-agent
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - events
-  - namespaces
-  - pods
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - "rbac.authorization.k8s.io"
-  resources:
-  - clusterroles
-  - clusterrolebindings
-  - roles
-  - rolebindings
-  verbs:
-  - get
-  - list
-  - watch
----
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: threatstack-agent
-  namespace: default
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: threatstack-agent
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: threatstack-agent
-subjects:
-- kind: ServiceAccount
   name: threatstack-agent
   namespace: default
 ---
@@ -122,6 +82,8 @@ spec:
       - image: threatstack/ts-docker2:2.5.0
         imagePullPolicy: Always
         name: threatstack-agent
+        command: ["bash"]
+        args: ["-c", "chroot /threatstackfs /bin/bash -c 'service auditd stop; systemctl disable auditd'; eval tsagent setup $THREATSTACK_SETUP_ARGS; eval tsagent config --set $THREATSTACK_CONFIG_ARGS; sleep 5; /opt/threatstack/sbin/tsagentd -logstdout"]
         livenessProbe:
           exec:
             command: [ "sh", "-c", "tsagent status" ]

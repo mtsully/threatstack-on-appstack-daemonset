@@ -1,0 +1,25 @@
+{
+    "metadata": {
+        "name": "threatstack-agent",
+        "namespace": "system",
+        "labels": {},
+        "annotations": {},
+        "description": "",
+        "disable": false
+    },
+    "spec": {
+        "k8s_cluster_role": {
+            "tenant": "",
+            "namespace": "system",
+            "name": "threatstack-agent"
+        },
+        "subjects": [
+            {
+                "service_account": {
+                    "namespace": "default",
+                    "name": "threatstack-agent"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "metadata": {
+        "name": "coleman-permissive",
+        "namespace": "system",
+        "labels": {},
+        "annotations": {},
+        "description": "",
+        "disable": false
+    },
+    "spec": {
+        "psp_spec": {
+            "privileged": true,
+            "allow_privilege_escalation": true,
+            "default_allow_privilege_escalation": true,
+            "no_default_capabilities": {},
+            "allowed_capabilities": {
+                "capabilities": [
+                    "AUDIT_CONTROL",
+                    "AUDIT_READ",
+                    "SYS_NICE",
+                    "SYS_PTRACE",
+                    "SYS_ADMIN"
+                ]
+            },
+            "no_drop_capabilities": {},
+            "volumes": [
+                "hostPath"
+            ],
+            "allowed_flex_volumes": [],
+            "allowed_host_paths": [
+                {
+                    "path_prefix": "/",
+                    "read_only": false
+                },
+                {
+                    "path_prefix": "/threatstackfs",
+                    "read_only": false
+                }
+            ],
+            "allowed_proc_mounts": [],
+            "read_only_root_filesystem": false,
+            "allowed_csi_drivers": [],
+            "host_network": true,
+            "host_port_ranges": "",
+            "host_ipc": false,
+            "host_pid": false,
+            "allowed_unsafe_sysctls": [],
+            "forbidden_sysctls": [],
+            "no_run_as_user": {},
+            "no_run_as_group": {},
+            "no_supplemental_groups": {},
+            "no_fs_groups": {},
+            "no_se_linux_options": {},
+            "no_runtime_class": {}
+        }
+    }
+}
