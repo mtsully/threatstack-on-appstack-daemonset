@@ -1,4 +1,4 @@
-# Threat Stack on AppStack (Managed K8s) Deployment Yaml
+# Threat Stack on AppStack (Managed K8s) Deployment
 
 This file is a template for deploying the Threat Stack agent on F5 XCS Managed Kubernetes. This is meant as a base to build off of. Users may wish to change the namespace, the resource limits, etc.
 
